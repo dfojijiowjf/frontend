@@ -1,0 +1,117 @@
+.tabs {
+    display: flex;
+    flex-direction: row;
+    list-style-type:none;
+    width: 90%;
+    border-bottom: 1px black solid;
+    margin-top: 10px;
+    justify-content: space-between;
+}
+.tab {
+    padding: 10px;
+    margin-right: 5px;
+}
+
+.tab:hover {
+    padding: 8px;
+    margin-right: 5px;    
+    cursor: pointer;
+    border-top: 1px black solid;
+    border-left: 1px black solid;
+    border-right: 1px black solid;
+}
+
+.tab-selected {
+    padding: 8px;
+    margin-right: 5px;    
+    border-top: 1px black solid;
+    border-left: 1px black solid;
+    border-right: 1px black solid;
+}
+
+.students {
+    width: 90%;
+    padding-top: 10px;
+}
+
+.student {
+    background-color: #efefef;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: space-around;
+    border-top: 1px rgba(0,0,0,0.4) solid;
+    border-bottom: 1px rgba(0,0,0,0.4) solid;
+}
+
+.students-header {
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 5px;
+    font-weight: bold;
+}
+
+.t {
+    flex:0.1
+}
+
+.add-group {
+    background-color: #019ed3;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    color: white;
+    font-size: 18px;
+    margin-right: 5px;
+}
+
+.add-group:hover {
+    cursor: pointer;
+    background-color: #007399;
+}
+.group {
+    display: flex;
+    justify-content: space-around;
+    border: 1px rgba(0,0,0,0.4) solid;
+    padding: 10px;
+    border-radius: 5px;
+}
+.selected-group {
+    display: flex;
+    justify-content: space-around;
+    border: 1px rgba(0,0,0,0.4) solid;
+    padding: 10px;
+    background-color: #efefef;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.group-students {
+    border: 1px rgba(0,0,0,0.4) solid;
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.dropdown {
+    border: none;
+    background-color: transparent;
+}
+
+.dropdown:hover {
+    cursor: pointer;
+}
+
+.submit-group {
+    padding: 5px;
+    margin-top: 5px;
+    width: 100px;
+}
+
+.add-group-in {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+}
