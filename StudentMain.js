@@ -87,30 +87,38 @@ const StudentMain = () => {
         } else {
             studentInfo(user.access_token).then(resp => {
                 if (resp.msg == "success") {
-                    setEnrolled(resp.enrolled_subjects)
-                    setSubjects(resp.subjects)
-                    setGroups(resp.groups)
-                    setSelectedSubject((resp.subjects)[0].subjectId)
-                    setSelectedSubjectOptions(JSON.parse((resp.subjects)[0].options))
-
-                    const opts = {}
-                    const allOptions = new Set()
-                    resp.subjects.map(sub => {
-                        opts[sub.subjectId] = sub.options
-                        
-                        const x = JSON.parse(sub.options)
-                        for(var i=0;i<x.length;i++) {
-                            allOptions.add(x[i])
-                        }
-                    })
-                    setSubjectIdToOptions(opts)
-                    
-                    const opts2 = {}
-                    for(const item of allOptions) {
-                        opts2[item] = false
+                     if (resp.enrolled_subjects.length != 0) {
+                        setEnrolled(resp.enrolled_subjects)
                     }
+                    if (resp.subjects != 0) {
+                        setSubjects(resp.subjects)
+                        setSelectedSubjectOptions(JSON.parse((resp.subjects)[0].options))
+                        setSelectedSubject((resp.subjects)[0].subjectId)
+                        const opts = {}
+                        const allOptions = new Set()
+                        resp.subjects.map(sub => {
+                            opts[sub.subjectId] = sub.options
 
-                    setSelectedOptions(opts2)
+                            const x = JSON.parse(sub.options)
+                            for (var i = 0; i < x.length; i++) {
+                                allOptions.add(x[i])
+                            }
+                        })
+                        setSubjectIdToOptions(opts)
+
+                        const opts2 = {}
+                        for (const item of allOptions) {
+                            opts2[item] = false
+                        }
+
+                        setSelectedOptions(opts2)
+                    }
+                    if (resp.groups != 0) {
+                        setGroups(resp.groups)
+                    }
+                    if (resp.members != 0) {
+                        setMembers(resp.members)
+                    }
                 } else {
                     alert("Error")
                     console.log(resp)
@@ -209,7 +217,40 @@ const StudentMain = () => {
                     </div>
                     <div>
                         <h1>Groups</h1>
-                        { }
+                        {groups == null ? null : groups.map(group => {
+                            const groupMembers = members[group.groupId]
+                            return (
+                                <div key={group.groupId} style={{ paddingBottom: '10px' }}>
+                                    <div className={showStudents == group.groupId ? 'selected-group' : 'group'}>
+                                        <button className='dropdown' onClick={(e) => {
+                                            if (showStudents == group.groupId) {
+                                                setShowStudents("")
+                                            } else {
+                                                setShowStudents(group.groupId)
+                                            }
+                                        }}>
+                                            <MdArrowDropDown />
+                                        </button>
+                                        <p>{group.name}</p>
+                                        <p>{group.numStudents} students</p>
+                                    </div>
+                                    {showStudents != group.groupId ? null :
+                                        <div className='group-students'>
+                                            {groupMembers == null
+                                                ? null
+                                                : groupMembers.map(member => {
+                                                    return (
+                                                        <div key={member.id}>
+                                                            <p>{member.name}</p>
+                                                        </div>
+                                                    )
+                                                })
+                                            }
+                                        </div>
+                                    }
+                                </div>
+                            )
+                        })}
                     </div>
                 </div>
             </div>
